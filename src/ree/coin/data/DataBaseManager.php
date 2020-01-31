@@ -73,9 +73,4 @@ class DataBaseManager implements DataBaseAPI_Base
 		$stmt = $this->db->prepare('SELECT money FROM moneys');
 		return $stmt->execute()->fetchArray(SQLITE3_ASSOC);
 	}
-
-	public function registar(string $name): void
-	{
-
-	}
 }

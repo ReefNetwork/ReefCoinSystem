@@ -31,7 +31,6 @@ class ReefCoinSystemCore extends PluginBase
 	{
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener() ,$this);
 		parent::onEnable();
-		var_dump(ReefCoinAPI::getCoin("12"));
 	}
 
 	public static function getDataBaseManager(): DataBaseManager
