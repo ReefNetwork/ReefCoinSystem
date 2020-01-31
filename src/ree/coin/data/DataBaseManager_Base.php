@@ -4,12 +4,11 @@
 namespace ree\coin\data;
 
 
-use SQLite3;
 
-interface DataBaseAPI_Base
+interface DataBaseManager_Base
 {
 	/**
-	 * DataBaseAPI_Base constructor.
+	 * DataBaseManager_Base constructor.
 	 * @param string $db
 	 */
 	public function __construct(string $db);

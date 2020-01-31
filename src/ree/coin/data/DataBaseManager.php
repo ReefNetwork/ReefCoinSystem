@@ -6,7 +6,7 @@ namespace ree\coin\data;
 use SQLite3;
 
 
-class DataBaseManager implements DataBaseAPI_Base
+class DataBaseManager implements DataBaseManager_Base
 {
 
 	/**
