@@ -17,6 +17,12 @@ interface LandDataBaseManager_Base
 	public function __construct(string $pass);
 
 	/**
+	 * @param string $id
+	 * @return bool
+	 */
+	public function isExists(string $id): bool ;
+
+	/**
 	 * @param Vector3 $vec3
 	 * @param Level $level
 	 * @return string
