@@ -7,6 +7,8 @@ namespace ree\coin;
 use pocketmine\plugin\PluginBase;
 use ree\coin\data\DataBaseManager;
 use ree\coin\listener\EventListener;
+use ree\sub\client\ReefCoinClient;
+use ree\sub\land\ReefLand;
 
 class ReefCoinSystemCore extends PluginBase
 {
@@ -30,6 +32,10 @@ class ReefCoinSystemCore extends PluginBase
 	public function onEnable()
 	{
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener() ,$this);
+		echo 'ReefCoinSystemCore >> Loading subsystem...'."\n";
+		ReefCoinClient::load($this);
+		ReefLand::load($this);
+		echo 'ReefCoinSystemCore >> Complete'."\n";
 		parent::onEnable();
 	}
 

@@ -14,13 +14,13 @@ interface ReefLandAPI_Base
 	 * @param Vector3 $start
 	 * @param Vector3 $end
 	 * @param Level $level
-	 * @param bool $canUseWe
-	 * @param bool $canUseSkill
+	 * @param string $id
 	 * @param int $maxHeight
 	 * @param int $maxEntityCount
+	 * @param bool $canUseSkill
 	 * @return bool
 	 */
-	public static function addProtect(string $name , Vector3 $start , Vector3 $end , Level $level , bool $canUseWe , bool $canUseSkill , int $maxHeight = 256, int $maxEntityCount = 3 ): bool ;
+	public static function addProtect(string $name , Vector3 $start , Vector3 $end , Level $level ,string $id ,int $maxHeight = 256, int $maxEntityCount = 3 ,bool $canUseSkill = true): bool ;
 
 	/**
 	 * @param string $name
@@ -111,16 +111,4 @@ interface ReefLandAPI_Base
 	 * @return bool
 	 */
 	public static function setCanUseSkill(string $id): bool ;
-
-	/**
-	 * @param string $id
-	 * @return bool|null
-	 */
-	public static function isCanUseWe(string $id): ?bool ;
-
-	/**
-	 * @param string $id
-	 * @return bool
-	 */
-	public static function setCanUseWe(string $id): bool ;
 }
