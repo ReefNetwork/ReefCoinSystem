@@ -43,6 +43,15 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 	/**
 	 * @inheritDoc
 	 */
+	public function getAll(): array
+	{
+		$stmt = $this->db->prepare('SELECT id FROM land');
+		return $stmt->execute()->fetchArray(SQLITE3_NUM);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
 	public function getProtect(Vector3 $vec3, Level $level): ?string
 	{
 		$stmt = $this->db->prepare('SELECT id FROM land WHERE (sx <= :x ,sz <= :z ,ex >= :x ,ez >= :z ,level = :level)');

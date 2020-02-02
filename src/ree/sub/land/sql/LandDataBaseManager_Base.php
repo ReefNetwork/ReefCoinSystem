@@ -23,6 +23,11 @@ interface LandDataBaseManager_Base
 	public function isExists(string $id): bool ;
 
 	/**
+	 * @return array
+	 */
+	public function getAll(): array ;
+
+	/**
 	 * @param Vector3 $vec3
 	 * @param Level $level
 	 * @return string
