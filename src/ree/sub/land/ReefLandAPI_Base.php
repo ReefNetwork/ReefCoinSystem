@@ -32,12 +32,13 @@ interface ReefLandAPI_Base
 
 	/**
 	 * @param Vector3 $vec3
+	 * @param Level $level
 	 * @return string
 	 *
 	 * Returns the land id
 	 * If not return null
 	 */
-	public static function getProtect(Vector3 $vec3): ?string ;
+	public static function getProtect(Vector3 $vec3 ,Level $level): ?string ;
 
 	/**
 	 * @param string $id
@@ -47,6 +48,13 @@ interface ReefLandAPI_Base
 	 * If not return null
 	 */
 	public static function getProtectOwner(string $id): ?string ;
+
+	/**
+	 * @param string $id
+	 * @param string $name
+	 * @return bool
+	 */
+	public static function setProtectOwner(string $id ,string $name): bool ;
 
 	/**
 	 * @param string $id
@@ -76,6 +84,13 @@ interface ReefLandAPI_Base
 
 	/**
 	 * @param string $id
+	 * @param int $count
+	 * @return bool
+	 */
+	public static function setMaxEntityCount(string $id ,int $count): bool ;
+
+	/**
+	 * @param string $id
 	 * @return int|null
 	 */
 	public static function getEntityCount(string $id): ?int ;
@@ -86,6 +101,20 @@ interface ReefLandAPI_Base
 	 * @return bool
 	 */
 	public static function setEntityCount(string $id ,int $count): bool ;
+
+	/**
+	 * @param string $id
+	 * @param int $count
+	 * @return bool
+	 */
+	public static function addEntityCount(string $id ,int $count = 1 ): bool ;
+
+	/**
+	 * @param string $id
+	 * @param int $count
+	 * @return bool
+	 */
+	public static function removeEntityCount(string $id ,int $count = 1 ): bool ;
 
 	/**
 	 * @param string $id
@@ -104,11 +133,12 @@ interface ReefLandAPI_Base
 	 * @param string $id
 	 * @return bool|null
 	 */
-	public static function isCanUseSkill(string $id): ?bool ;
+	public static function isCanUseSkill(string $id): bool ;
 
 	/**
 	 * @param string $id
+	 * @param bool $bool
 	 * @return bool
 	 */
-	public static function setCanUseSkill(string $id): bool ;
+	public static function setCanUseSkill(string $id ,bool $bool): bool ;
 }
