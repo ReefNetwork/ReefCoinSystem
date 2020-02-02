@@ -156,7 +156,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt = $this->db->prepare('SELECT sx ,sz ,ex ,ez FROM land WHERE (id = :id)');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
-		return new AxisAlignedBB($result['sx'] ,1 ,$result['sz'] ,$result['ex'] ,1 ,$result['ez']);
+		return new AxisAlignedBB($result['sx'] ,1 ,$result['sz'] ,$result['ex'] ,$this->getMaxHeight($id) ,$result['ez']);
 	}
 
 	/**
