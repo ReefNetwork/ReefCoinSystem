@@ -44,6 +44,12 @@ interface LandDataBaseManager_Base
 
 	/**
 	 * @param string $id
+	 * @return bool
+	 */
+	public function removeProtect(string $id): bool ;
+
+	/**
+	 * @param string $id
 	 * @return string|null
 	 */
 	public function getOwner(string $id): ?string ;

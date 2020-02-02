@@ -86,6 +86,22 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindParam(':canskill', $canUseSkill, SQLITE3_INTEGER);
 		$stmt->bindParam(':subuser', $subuser, SQLITE3_INTEGER);
 		$stmt->execute();
+		return true;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function removeProtect(string $id): bool
+	{
+		if (!$this->isExists($id))
+		{
+			return false;
+		}
+		$stmt = $this->db->prepare('DELETE FROM land WHERE id = :id');
+		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
+		$stmt->execute();
+		return true;
 	}
 
 	/**
@@ -116,6 +132,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
 		$stmt->bindParam(':name', $name, SQLITE3_TEXT);
 		$stmt->execute();
+		return true;
 	}
 
 	/**
@@ -149,6 +166,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindValue(':ex', $bb->maxX, SQLITE3_INTEGER);
 		$stmt->bindValue(':ez', $bb->maxZ, SQLITE3_INTEGER);
 		$stmt->execute();
+		return true;
 	}
 
 	/**
@@ -178,6 +196,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
 		$stmt->bindParam(':level', $level->getName(), SQLITE3_TEXT);
 		$stmt->execute();
+		return true;
 	}
 
 	/**
@@ -207,6 +226,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
 		$stmt->bindValue(':maxheight', $height, SQLITE3_INTEGER);
 		$stmt->execute();
+		return true;
 	}
 
 	/**
@@ -236,6 +256,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
 		$stmt->bindValue(':maxentity', $count, SQLITE3_INTEGER);
 		$stmt->execute();
+		return true;
 	}
 
 	/**
@@ -265,6 +286,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
 		$stmt->bindValue(':entity', $count, SQLITE3_INTEGER);
 		$stmt->execute();
+		return true;
 	}
 
 	/**
@@ -294,6 +316,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
 		$stmt->bindParam(':canskill', $bool , SQLITE3_BOTH);
 		$stmt->execute();
+		return true;
 	}
 
 	/**
@@ -323,6 +346,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
 		$stmt->bindParam(':subuser', $users, SQLITE3_TEXT);
 		$stmt->execute();
+		return true;
 	}
 
 	public function getSpawnPoint(string $id): ?Vector3
@@ -334,7 +358,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt = $this->db->prepare('SELECT spx ,spy ,spz FROM land WHERE (id = :id)');
 		$stmt->bindParam(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
-		return new Vector3($result['spx'] ,$result['spy'] ,$result['spz']);
+		return new Vector3($result['spx'] + 0.5 ,$result['spy'] ,$result['spz'] + 0.5 );
 	}
 
 	public function setSpawnPoint(string $id, Vector3 $vec3): bool
@@ -349,6 +373,7 @@ class LandDataBaseManager implements LandDataBaseManager_Base
 		$stmt->bindValue(':spy', $vec3->getFloorY(), SQLITE3_INTEGER);
 		$stmt->bindValue(':spz', $vec3->getFloorZ(), SQLITE3_INTEGER);
 		$stmt->execute();
+		return true;
 	}
 
 	private function setTable(): void
