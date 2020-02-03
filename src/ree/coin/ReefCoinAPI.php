@@ -74,9 +74,8 @@ class ReefCoinAPI implements ReefCoinAPI_Base
 	{
 		if (self::isExists($send) and self::isExists($receive) and self::getCoin($send) >= $coin)
 		{
-			self::removeCoin($send ,$coin);
 			self::addCoin($receive ,$coin);
-			return true;
+			return self::removeCoin($send ,$coin);
 		}
 		return false;
 	}
