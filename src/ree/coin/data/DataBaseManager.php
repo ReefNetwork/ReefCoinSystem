@@ -35,9 +35,10 @@ class DataBaseManager implements DataBaseManager_Base
 
 	public function isExists(string $name): bool
 	{
+		$name = strtolower($name);
 		$stmt = $this->db->prepare('SELECT * FROM moneys WHERE (name = :name)');
 		$stmt->bindParam(':name', $name, SQLITE3_TEXT);
-		return !empty($stmt);
+		return !empty($stmt->execute()->fetchArray(SQLITE3_ASSOC));
 	}
 
 	/**
