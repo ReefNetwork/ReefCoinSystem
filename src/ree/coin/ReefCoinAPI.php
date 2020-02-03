@@ -19,6 +19,14 @@ class ReefCoinAPI implements ReefCoinAPI_Base
 	/**
 	 * @inheritDoc
 	 */
+	public static function getAll(): array
+	{
+		return ReefCoinSystemCore::getDataBaseManager()->getAllData();
+	}
+
+	/**
+	 * @inheritDoc
+	 */
 	public static function getCoin(string $name): int
 	{
 		return ReefCoinSystemCore::getDataBaseManager()->getCoin($name);
@@ -62,9 +70,15 @@ class ReefCoinAPI implements ReefCoinAPI_Base
 	/**
 	 * @inheritDoc
 	 */
-	public static function payCoin(string $send, string $receive): bool
+	public static function payCoin(string $send, string $receive ,int $coin): bool
 	{
-
+		if (self::isExists($send) and self::isExists($receive) and self::getCoin($send) >= $coin)
+		{
+			self::removeCoin($send ,$coin);
+			self::addCoin($receive ,$coin);
+			return true;
+		}
+		return false;
 	}
 
 	private static function round(float $coin): float

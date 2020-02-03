@@ -19,6 +19,11 @@ interface ReefCoinAPI_Base
 	public static function isExists(string $name): bool ;
 
 	/**
+	 * @return array
+	 */
+	public static function getAll(): array ;
+
+	/**
 	 * @param string $name
 	 * @return int
 	 */
@@ -46,7 +51,8 @@ interface ReefCoinAPI_Base
 	/**
 	 * @param string $send
 	 * @param string $receive
+	 * @param int $coin
 	 * @return bool
 	 */
-	public static function payCoin(string $send ,string $receive): bool ;
+	public static function payCoin(string $send ,string $receive ,int $coin): bool ;
 }
