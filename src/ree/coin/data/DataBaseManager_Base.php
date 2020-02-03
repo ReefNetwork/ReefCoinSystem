@@ -15,6 +15,12 @@ interface DataBaseManager_Base
 
 	/**
 	 * @param string $name
+	 * @return bool
+	 */
+	public function isExists(string $name): bool ;
+
+	/**
+	 * @param string $name
 	 * @param string $coin
 	 * @return bool
 	 */

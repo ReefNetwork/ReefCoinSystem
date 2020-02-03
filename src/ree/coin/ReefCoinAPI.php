@@ -4,8 +4,18 @@
 namespace ree\coin;
 
 
+use ree\coin\data\DataBaseManager;
+
 class ReefCoinAPI implements ReefCoinAPI_Base
 {
+	/**
+	 * @inheritDoc
+	 */
+	public static function isExists(string $name): bool
+	{
+		return ReefCoinSystemCore::getDataBaseManager()->isExists($name);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -47,6 +57,14 @@ class ReefCoinAPI implements ReefCoinAPI_Base
 		}else{
 			return false;
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public static function payCoin(string $send, string $receive): bool
+	{
+
 	}
 
 	private static function round(float $coin): float

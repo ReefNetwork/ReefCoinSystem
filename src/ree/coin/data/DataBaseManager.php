@@ -33,6 +33,13 @@ class DataBaseManager implements DataBaseManager_Base
 		$this->db->close();
 	}
 
+	public function isExists(string $name): bool
+	{
+		$stmt = $this->db->prepare('SELECT * FROM moneys WHERE (name = :name)');
+		$stmt->bindParam(':name', $name, SQLITE3_TEXT);
+		return !empty($stmt);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -70,7 +77,7 @@ class DataBaseManager implements DataBaseManager_Base
 	 */
 	public function getAllData(): array
 	{
-		$stmt = $this->db->prepare('SELECT money FROM moneys');
+		$stmt = $this->db->prepare('SELECT name FROM moneys');
 		return $stmt->execute()->fetchArray(SQLITE3_ASSOC);
 	}
 }
