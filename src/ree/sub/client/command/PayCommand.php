@@ -25,7 +25,7 @@ class PayCommand extends Command
 		];
 		$overloads = [
 			[
-				new CommandParameter('player' ,AvailableCommandsPacket::ARG_TYPE_TARGET ,false),
+				new CommandParameter('player' ,AvailableCommandsPacket::ARG_TYPE_TARGET),
 				new CommandParameter('coin' ,AvailableCommandsPacket::ARG_TYPE_INT),
 			],
 		];
@@ -40,9 +40,7 @@ class PayCommand extends Command
 	 */
 	public function execute(CommandSender $sender, string $commandLabel, array $args)
 	{
-		if (!$this->testPermission($sender)) {
-			return false;
-		}
+		if (!$this->testPermission($sender)) return false;
 		if (!$sender instanceof Player) {
 			$sender->sendMessage(ReefCoinClient::ERROR . 'Please run this command in-game');
 			return true;
