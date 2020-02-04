@@ -6,6 +6,8 @@ namespace ree\sub\client\command;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
+use pocketmine\network\mcpe\protocol\types\CommandParameter;
 use pocketmine\Player;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
@@ -15,8 +17,18 @@ use ree\sub\client\ReefCoinClient;
 
 class PayCommand extends Command
 {
-	public function __construct(string $name = 'pay', string $description = 'PayCommandForReefCoinSystem', string $usageMessage = null, array $aliases = [], ?array $overloads = null)
+	public function __construct(string $name = 'pay', string $description = 'PayCommandForReefCoinSystem', string $usageMessage = null)
 	{
+		$aliases = [
+			'reefPay',
+			'coinPay',
+		];
+		$overloads = [
+			[
+				new CommandParameter('player' ,AvailableCommandsPacket::ARG_TYPE_TARGET ,false),
+				new CommandParameter('coin' ,AvailableCommandsPacket::ARG_TYPE_INT),
+			],
+		];
 		parent::__construct($name, $description, $usageMessage, $aliases, $overloads);
 		$this->setPermissionMessage(TextFormat::RED . 'Set permissions from \'plugin.yml\' to \'true\' to allow use without permissions');
 		$this->setPermission('command.reefcoin.pay');
