@@ -97,15 +97,20 @@ class ReefCoinPayForm implements Form
 	public function jsonSerialize()
 	{
 		$title = 'PaySystem for '.ReefCoinSystemCore::getCoreName();
-		foreach (ReefCoinAPI::getAll() as $name)
+		$list = [];
+		if ($this->nameParts)
 		{
-			if (strpos($name ,$this->nameParts) !== false)
+			foreach (ReefCoinAPI::getAll() as $name)
 			{
-				$replace = str_replace($this->nameParts ,TextFormat::RED.$this->nameParts.TextFormat::RESET ,$name);
-				$this->names[] = $name;
-				$list[] = $replace;
+				if (strpos($name ,$this->nameParts) !== false)
+				{
+					$replace = str_replace($this->nameParts ,TextFormat::RED.$this->nameParts.TextFormat::RESET ,$name);
+					$this->names[] = $name;
+					$list[] = $replace;
+				}
 			}
 		}
+
 		if ($this->nameParts and !empty($list))
 		{
 			return [
